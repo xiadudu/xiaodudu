@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+
+<head>
+	<meta charset="utf-8">
+	<style>
+	.box {
+		width: 1920px;
+		height: 720px;
+		display: flex;
+	}
+
+	.div1 {
+		flex: 2;
+		background-color: #ccc;
+	}
+
+	.div2 {
+		flex: 1;
+		background-color: red;
+	}
+	</style>
+</head>
+
+<body style="height: 100%; margin: 0">
+	<div class="box">
+		<div id="container" class="div1" style="height: 100%;"></div>
+		<div class="div2"></div>
+	</div>
+	<script type="text/javascript" src="./echarts.js"></script>
+	<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
+	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=ZUONbpqGBsYGXNIYHicvbAbM"></script>
+	<script type="text/javascript">
+	var dom = document.getElementById("container");
+	var myChart = echarts.init(dom);
+	var app = {};
+	option = null;
+	var data1 = [
+	  { name: '北京市', value: 190 },
+	  { name: '天津市', value: 120 },
+	  { name: '上海市', value: 180 },
+	  { name: '重庆市', value: 160 },
+	  { name: '河北省', value: 150 },
+	  { name: '河南省', value: 120 }
+	];
+	var data = [
+	  { name: '北京市', value: 5 },
+	  { name: '天津市', value: 3000 },
+	  { name: '上海市', value: 250 },
+	  { name: '重庆市', value: 150 },
+	  { name: '河北省', value: 150 },
+	  { name: '河南省', value: 150 },
+	  { name: '云南省', value: 150 },
+	  { name: '辽宁省', value: 300 },
+	  { name: '黑龙江省', value: 150 },
+	  { name: '湖南省', value: 150 },
+	  { name: '安徽省', value: 150 },
+	  { name: '山东省', value: 5000 },
+	  { name: '新疆省', value: 150 },
+	  { name: '江苏省', value: 150 },
+	  { name: '浙江省', value: 150 },
+	  { name: '江西省', value: 150 },
+	  { name: '湖北省', value: 150 },
+	  { name: '广西省', value: 150 },
+	  { name: '甘肃省', value: 150 },
+	  { name: '山西省', value: 150 },
+	  { name: '内蒙古省', value: 150 },
+	  { name: '陕西省', value: 150 },
+	  { name: '吉林省', value: 150 },
+	  { name: '福建省', value: 150 },
+	  { name: '贵州省', value: 150 },
+	  { name: '广东省', value: 150 },
+	  { name: '青海省', value: 150 },
+	  { name: '西藏省', value: 150 },
+	  { name: '四川省', value: 150 },
+	  { name: '宁夏省', value: 150 },
+	  { name: '海南省', value: 150 },
+	  { name: '深圳市', value: 150 },
+	]
+	var geoCoordMap = {
+	  '北京市': [116.46, 39.92],
+	  '天津市': [117.2, 39.13],
+	  '上海市': [121.48, 31.22],
+	  '重庆市': [106.54, 29.59],
+	  '河北省': [114.48, 38.03],
+	  '河南省': [113.65, 34.76],
+	  '云南省': [102.73, 25.04],
+	  '辽宁省': [123.38, 41.8],
+	  '黑龙江省': [126.63, 45.75],
+	  '湖南省': [113, 28.21],
+	  '安徽省': [117.27, 31.86],
+	  '山东省': [117, 36.65],
+	  '新疆省': [87.68, 43.77],
+	  '江苏省': [118.78, 32.04],
+	  '浙江省': [120.19, 30.26],
+	  '江西省': [115.89, 28.68],
+	  '湖北省': [114.31, 30.52],
+	  '广西省': [108.33, 22.84],
+	  '甘肃省': [103.73, 36.03],
+	  '山西省': [112.53, 37.87],
+	  '内蒙古省': [111.65, 40.82],
+	  '陕西省': [108.95, 34.27],
+	  '吉林省': [125.35, 43.88],
+	  '福建省': [119.3, 26.08],
+	  '贵州省': [106.71, 26.57],
+	  '广东省': [113.23, 23.16],
+	  '青海省': [101.74, 36.56],
+	  '西藏省': [91.11, 29.97],
+	  '四川省': [104.06, 30.67],
+	  '宁夏省': [106.27, 38.47],
+	  '海南省': [110.35, 20.02],
+	  '深圳市': [114.07, 22.62],
+	}
+	//控制热力区域
+	var cityData = [{
+	    name: '天津',
+	    value: 0
+	  },
+	  {
+	    name: '上海',
+	    value: 14
+	  }, {
+	    name: '重庆',
+	    value: 1
+	  }, {
+	    name: '河北',
+	    value: 0
+	  }, {
+	    name: '河南',
+	    value: 0
+	  }, {
+	    name: '云南',
+	    value: 47
+	  }, {
+	    name: '辽宁',
+	    value: 0
+	  }, {
+	    name: '黑龙江',
+	    value: 0
+	  }, {
+	    name: '湖南',
+	    value: 4
+	  }, {
+	    name: '安徽',
+	    value: 1
+	  }, {
+	    name: '山东',
+	    value: 0
+	  }, {
+	    name: '新疆',
+	    value: 3
+	  }, {
+	    name: '江苏',
+	    value: 3
+	  }, {
+	    name: '浙江',
+	    value: 1
+	  }, {
+	    name: '江西',
+	    value: 1
+	  }, {
+	    name: '湖北',
+	    value: 5
+	  }, {
+	    name: '广西',
+	    value: 7
+	  }, {
+	    name: '甘肃',
+	    value: 5
+	  }, {
+	    name: '山西',
+	    value: 2
+	  }, {
+	    name: '内蒙古',
+	    value: 6
+	  }, {
+	    name: '陕西',
+	    value: 1
+	  }, {
+	    name: '吉林',
+	    value: 0
+	  }, {
+	    name: '福建',
+	    value: 5
+	  }, {
+	    name: '贵州',
+	    value: 5
+	  }, {
+	    name: '广东',
+	    value: 15
+	  }, {
+	    name: '青海',
+	    value: 3
+	  }, {
+	    name: '西藏',
+	    value: 2
+	  }, {
+	    name: '四川',
+	    value: 15
+	  }, {
+	    name: '宁夏',
+	    value: 0
+	  }, {
+	    name: '海南',
+	    value: 0
+	  }, {
+	    name: '台湾',
+	    value: 0
+	  }, {
+	    name: '香港',
+	    value: 0
+	  }, {
+	    name: '澳门',
+	    value: 0
+	  }
+	]
+
+	var convertData = function(data) {
+	  var res = [];
+	  for (var i = 0; i < data.length; i++) {
+	    var geoCoord = geoCoordMap[data[i].name];
+	    if (geoCoord) {
+	      res.push({
+	        name: data[i].name,
+	        value: geoCoord.concat(data[i].value)
+	      });
+	    }
+	  }
+	  return res;
+	};
+	option = {
+	  backgroundColor: '#404a59',
+	  title: {
+	    text: '全国学生登录情况',
+	    subtext: 'data from 高校邦',
+	    sublink: 'http://www.pm25.in',
+	    left: 'center',
+	    textStyle: {
+	      color: '#fff'
+	    }
+	  },
+	  geo: {
+	    map: 'china',
+	    label: {
+	      emphasis: {
+	        show: false
+	      }
+	    },
+	    roam: false,
+	    itemStyle: {
+	      normal: {
+	        areaColor: '#323c48',
+	        borderColor: '#111'
+	      },
+	      emphasis: {
+	        areaColor: '#2a333d'
+	      }
+	    }
+	  },
+	  dataRange: {
+	    min: 0,
+	    max: 50,
+	    text: ['High', 'Low'],
+	    realtime: false,
+	    calculable: true,
+	    color: ['orangered', 'yellow', 'lightskyblue']
+	  },
+	  series: [{
+	    name: '用户',
+	    type: 'effectScatter',
+	    coordinateSystem: 'geo',
+	    data: convertData(data1),
+	    zlevel: 99,
+	    label: {
+	      normal: {
+	        formatter: '{b}',
+	        position: 'bottom',
+	        show: false
+	      },
+	      emphasis: {
+	        show: false
+	      }
+	    },
+	    symbolSize: function(val) {
+	      return val[2] / 10;
+	    },
+	    animationEasing: 'elasticOut',
+	    animationDelayUpdate: function(idx) {
+	      return idx * 20;
+	    },
+	    animationDelay: function(idx) {
+	      return idx * 10 + 100;
+	    },
+	    itemStyle: {
+	      normal: {
+	        color: '#f4e925',
+	        shadowBlur: 8,
+	        shadowColor: '#ccc'
+	      }
+	    }
+	  }, {
+	    name: '用户',
+	    type: 'scatter',
+	    coordinateSystem: 'geo',
+	    data: convertData(data),
+	    symbol: "image://blank.png",
+	    label: {
+	      normal: {
+	        formatter: '{b}',
+	        position: "bottom",
+	        show: true,
+	        color: "#000"
+	      },
+	      emphasis: {
+	        show: true
+	      }
+	    },
+	    itemStyle: {
+	      normal: {
+	        color: '#fff',
+	        shadowBlur: 8,
+	        shadowColor: '#ccc'
+	      }
+	    }
+	  }, {
+	    name: 'network',
+	    type: 'map',
+	    mapType: "china",
+	    data: cityData,
+	    z: 0,
+	    label: {
+	      normal: {
+	        formatter: '{b}',
+	        position: 'bottom',
+	        show: false
+	      },
+	      emphasis: {
+	        show: false
+	      }
+	    },
+	    itemStyle: {
+	      emphasis: { label: { show: true } }
+	    }
+	  }]
+	};;
+	if (option && typeof option === "object") {
+	  myChart.setOption(option, true);
+	}
+	sleep();
+
+	function sleep() {
+	  setTimeout(function() {
+	    data1 = [
+	      { name: '北京市', value: 150 },
+	      { name: '天津市', value: 150 },
+	      { name: '上海市', value: 50 },
+	      { name: '重庆市', value: 200 },
+	      { name: '河北省', value: 180 },
+	      { name: '河南省', value: 150 }
+	    ];
+	    option.series[0].data = convertData(data1);
+	    myChart.setOption(option, true);
+	    setTimeout(function() {
+	      data1 = [
+	        { name: '北京市', value: 150 },
+	        { name: '天津市', value: 150 },
+	        { name: '上海市', value: 50 },
+	        { name: '重庆市', value: 200 },
+	        { name: '河北省', value: 180 },
+	        { name: '河南省', value: 150 },
+	        { name: '内蒙古省', value: 150 },
+	        { name: '陕西省', value: 180 },
+	        { name: '吉林省', value: 50 },
+	        { name: '福建省', value: 50 },
+	        { name: '贵州省', value: 50 },
+	        { name: '广东省', value: 50 }
+	      ];
+	      option.series[0].data = convertData(data1);
+	      myChart.setOption(option, true);
+	      setTimeout(function() {
+	        data1 = [
+	          { name: '吉林省', value: 50 },
+	          { name: '福建省', value: 50 },
+	          { name: '贵州省', value: 50 },
+	          { name: '广东省', value: 50 }
+	        ];
+	        option.series[0].data = convertData(data1);
+	        myChart.setOption(option, true);
+	        setTimeout(function() {
+	          sleep();
+	        }, 300)
+	      }, 300)
+	    }, 400)
+	  }, 1000);
+	}
+	</script>
+</body>
+<script>
+</script>
+
+</html>
