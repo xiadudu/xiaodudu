@@ -3,16 +3,12 @@
 import Vue from "vue";
 import App from "./App";
 import router from "./router";
-import filterAll from "./filters/str";
-import componentALl from "./components/textComponent.vue";
-import hello from "./components/Hello.vue";
-
-Vue.filter("strilter", filterAll);
-Vue.component("du-s", componentALl);
-Vue.component("hello", hello);
+import componentsInstaller from "@/framework/core/components";
+import filtersInstaller from "@/framework/core/filters";
 
 Vue.config.productionTip = false;
-
+componentsInstaller.install(Vue);
+filtersInstaller.install(Vue);
 /* eslint-disable no-new */
 new Vue({
   el: "#app",
