@@ -1,3 +1,4 @@
+import service from "@/services/class.service";
 export default {
   name: "home",
   data () {
@@ -9,10 +10,12 @@ export default {
   watch: {
   },
   mounted () {
+    service.getData({}).then((res) => {
+      console.log(res);
+    });
   },
   methods: {
   },
   computed: {
   }
-
 };

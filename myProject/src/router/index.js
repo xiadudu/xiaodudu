@@ -11,12 +11,11 @@ const router = {
   routes: [{
     path: "/",
     component: home
-  }// _template
+  },// _template
+  ...classRouter
   ]
 };
 
-router.routes = router.routes.concat(classRouter);
 const RouterInstance = new Router(router);
 
 export default RouterInstance;
-
