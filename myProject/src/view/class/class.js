@@ -1,22 +1,12 @@
 export default {
-  name: "home",
   data () {
-    return {
+    const item = {
+      date: "2016-05-02",
+      name: "王小虎",
+      address: "上海市普陀区金沙江路 1518 弄"
     };
-  },
-  watch: {
-    "data": {
-      deep: true,
-      handler: function (val, oldVal) {
-        console.log(val);
-      }
-    }
-  },
-  mounted () {
-  },
-  methods: {
-  },
-  computed: {
+    return {
+      tableData: Array(20).fill(item)
+    };
   }
-
 };
