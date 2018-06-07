@@ -28,6 +28,7 @@ service.interceptors.response.use(function (response) {
   return response;
 }, function (error) {
   // Do something with response error
+  console.log(error);
   let errorcode = error.response && error.response.status;
   if (errorcode === "404") {
     alert(error);

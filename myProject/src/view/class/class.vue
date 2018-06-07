@@ -1,9 +1,5 @@
 <template>
-  <el-container>
-    <el-header>Header</el-header>
-    <el-main>Main</el-main>
-    <el-footer>Footer</el-footer>
-  </el-container>
+    <my-header></my-header>   
 </template>
 <script>
 import classCtrl from "./class";

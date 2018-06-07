@@ -1,4 +1,253 @@
-body{
+/* 清除内外边距 */
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+hr,
+p,
+blockquote,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+pre,
+fieldset,
+lengend,
+button,
+input,
+textarea,
+th,
+td {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+
+body,
+button,
+input,
+select,
+textarea {
+  font-family: arial, Microsoft Yahei, WenQuanYi Micro Hei, sans-serif, Hiragino Sans GB, Helvetica Neue, Helvetica;
+  /* 用 ascii 字符表示，使得在任何编码下都无问题 */
+  word-wrap: break-word;
+}
+
+div {
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+i {
+  font-style: normal;
+}
+
+h1 {
+  font-size: 20px;
+}
+
+h2 {
+  font-size: 16px;
+}
+
+h3 {
+  font-size: 14px;
+}
+
+h4,
+h5,
+h6 {
+  font-size: 100%;
+}
+
+address,
+cite,
+dfn,
+em,
+var {
+  font-style: normal;
+}
+
+
+
+/* 将斜体扶正 */
+
+code,
+kbd,
+pre,
+samp,
+tt {
+  font-family: "Courier New", Courier, monospace;
+}
+
+
+
+/* 统一等宽字体 */
+
+small {
+  font-size: 12px;
+}
+
+
+
+/* 小于 12px 的中文很难阅读，让 small 正常化 */
+
+
+/* 重置列表元素 */
+
+ul,
+ol {
+  list-style: none;
+}
+
+
+
+/* 重置文本格式元素 */
+
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+a:focus {
+  text-decoration: none;
+  box-shadow: none;
+  outline: none;
+}
+
+abbr[title],
+acronym[title] {
+  cursor: help;
+}
+
+q:before,
+q:after {
+  content: '';
+}
+
+
+
+/* 重置表单元素 */
+
+legend {
+  color: #000;
+}
+
+
+
+/* for ie6 */
+
+fieldset,
+img {
+  border: none;
+}
+
+html {
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+
+
+
+/* img 搭车：让链接里的 img 无边框 */
+
+
+/* 注：optgroup 无法扶正 */
+
+button,
+input,
+select,
+textarea {
+  font-size: 100%;
+  /* 使得表单元素在 ie 下能继承字体大小 */
+}
+
+
+
+/* 重置表格元素 */
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+img {
+  border: 0 none;
+  max-width: 100%;
+}
+
+
+
+/* 重置 hr */
+
+hr {
+  border: none;
+  height: 1px;
+}
+
+
+
+/* 让非ie浏览器默认也显示垂直滚动条，防止因滚动条引起的闪烁 */
+
+textarea {
+  resize: none;
+}
+
+
+
+
+/*浮动方式*/
+
+.fl_left {
+  float: left;
+}
+
+.fl_right {
+  float: right;
+}
+
+
+
+/*清除浮动*/
+
+.clear-fix {
+  zoom: 1;
+  &:before,
+  &:after {
+    content: " "; // 1
+    display: table; // 2
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+
+
+/*隐藏显示*/
+
+.hide {
+  display: none;
+}
+
+.block {
+  display: block;
 }
